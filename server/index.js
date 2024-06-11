@@ -1,5 +1,5 @@
 import express from 'express';
-import { sequelize, User, Snack} from './models/db.js'; // Ensure you import from the correct file
+import { sequelize, User, Snack } from './models/db.js'; 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,7 +12,6 @@ app.get('/users', async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
-    // console.log(users)
   } catch (err) {
     res.status(500).send('Error retrieving users');
   }
@@ -20,15 +19,35 @@ app.get('/users', async (req, res) => {
 
 // Define a route to get all snacks
 app.get('/snacks', async (req, res) => {
-    try {
-      const snacks = await Snack.findAll();
-      res.json(snacks);
-    //   console.log(snacks);
-    } catch (err) {
-      res.status(500).send('Error retrieving snacks');
+  try {
+    const snacks = await Snack.findAll();
+    res.json(snacks);
+  } catch (err) {
+    res.status(500).send('Error retrieving snacks');
+  }
+});
+
+// Define a route to get snacks for a particular user
+app.get('/users/:userId/snacks', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findByPk(userId, {
+      include: {
+        model: Snack,
+        as: 'snacks',
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
     }
-  });
-  
+
+    res.json(user.snacks);
+  } catch (error) {
+    console.error('Error fetching snacks:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -55,4 +74,3 @@ const startServer = async () => {
 
 // Execute the startServer function
 startServer();
-
