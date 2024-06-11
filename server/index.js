@@ -1,5 +1,5 @@
 import express from 'express';
-import { sequelize, User } from './models/index.js'; // Ensure you import from the correct file
+import { sequelize, User, Snack} from './models/db.js'; // Ensure you import from the correct file
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,11 +12,23 @@ app.get('/users', async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
-    console.log(users)
+    // console.log(users)
   } catch (err) {
     res.status(500).send('Error retrieving users');
   }
 });
+
+// Define a route to get all snacks
+app.get('/snacks', async (req, res) => {
+    try {
+      const snacks = await Snack.findAll();
+      res.json(snacks);
+    //   console.log(snacks);
+    } catch (err) {
+      res.status(500).send('Error retrieving snacks');
+    }
+  });
+  
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
