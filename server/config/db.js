@@ -7,7 +7,7 @@ const sequelize = new Sequelize('bitebyte', 'postgres', 'bitepassword', {
   dialect: 'postgres',
 });
 
-// Define a User model (optional, for demonstration)
+// Define a User model
 const User = sequelize.define('User', {
   username: {
     type: DataTypes.STRING,
@@ -33,7 +33,7 @@ const testConnection = async () => {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
 
-    // Optionally, sync the User model and query data
+    // Sync the User model and query data
     await sequelize.sync();
     const users = await User.findAll();
     console.log('Users:', JSON.stringify(users, null, 2));
