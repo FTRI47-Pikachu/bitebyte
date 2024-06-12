@@ -76,7 +76,15 @@ const TestFileUpload: React.FC = () => {
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUploadClick} disabled={uploading}>
+      <button
+        onClick={handleUploadClick}
+        disabled={uploading}
+        className={`px-4 py-2 rounded-md transition-colors duration-300 ${
+          uploading
+            ? 'bg-gray-400 text-gray-800 cursor-not-allowed'
+            : 'bg-blue-500 text-white hover:bg-blue-600'
+        }`}
+      >
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
     </div>
