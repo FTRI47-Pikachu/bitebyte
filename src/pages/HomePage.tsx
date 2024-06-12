@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "./car1";
-import Add from "../components/Add";
+import Add from "../components/AddSnack";
 
 const HomePage: React.FC = () => {
   const slides = [

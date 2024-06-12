@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import UploadImg from "./UploadImg";
 
-const Add: React.FC = () => {
+const AddSnack: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [text, setText] = useState<string>("");
   const [textarea, setTextarea] = useState<string>("");
@@ -67,4 +67,4 @@ const Add: React.FC = () => {
   );
 };
 
-export default Add;
+export default AddSnack;
