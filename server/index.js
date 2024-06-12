@@ -3,23 +3,14 @@ import multer from 'multer';
 import aws from 'aws-sdk';
 import { sequelize, User, Snack } from './models/db.js'; 
 import session from 'express-session';
-import dotenv from 'dotenv';
-// Load environment variables from .env file
-dotenv.config();
+import multer from 'multer';
+
 
 
 const app = express();
-const upload = multer({ dest: 'uploads/' });
-const PORT = 3001;
+const upload = multer();
+const PORT = process.env.PORT || 3001;
 
-// Configure AWS S3
-aws.config.update({
-  accessKeyId: process.env.VITE_AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.VITE_AWS_SECRET_ACCESS_KEY
-  region: 'us-east-1', // Replace with your S3 bucket region
-});
-
-const s3 = new aws.S3();
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -49,6 +40,29 @@ app.get('/snacks', async (req, res) => {
     res.json(snacks);
   } catch (err) {
     res.status(500).send('Error retrieving snacks');
+  }
+});
+
+// POST route to add a new snack
+app.post('/snacks', upload.none(), async (req, res) => {
+  const { text: name, textarea: comment, user_id, fileUrl: photo_url } = req.body;
+
+  try {
+    // Create a new snack record in the database
+    const newSnack = await Snack.create({
+      user_id: parseInt(user_id, 10),  // Make sure user_id is an integer
+      name,
+      photo_url,
+      category: 'test',  // Hardcoded category as 'test'
+      rating: null,      // No rating provided
+      comment,
+      image: null        // No image blob provided
+    });
+
+    res.status(201).send({ message: 'Snack created successfully', snack: newSnack });
+  } catch (error) {
+    console.error('Error creating snack:', error);
+    res.status(500).send({ error: 'Failed to create snack' });
   }
 });
 
@@ -101,6 +115,28 @@ app.post('/login', async (req, res) => {
     res.status(200).json({ message: 'Login successful', userId: user.id });
   } catch (error) {
     console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Define a route to sign up a user
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ where: { username } });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Username already taken' });
+    }
+
+    // Create a new user
+    const newUser = await User.create({ username, password });
+
+    res.status(200).json({ message: 'Signup successful', userId: newUser.id });
+  } catch (error) {
+    console.error('Error during signup:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

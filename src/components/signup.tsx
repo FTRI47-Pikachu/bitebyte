@@ -1,16 +1,39 @@
 import React, { useState, FormEvent } from 'react';
-//import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from './header';
 
 const Signup: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Signup success: ', data);
+        navigate('/');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error);
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      setError('An error occurred during signup. Please try again.');
+
+    }
   };
 
   return (
@@ -39,7 +62,7 @@ const Signup: React.FC = () => {
         </div>
         <button type="submit">Create Account</button>
       </form>
-      
+
     </div>
   );
 };
