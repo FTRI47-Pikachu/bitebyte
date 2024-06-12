@@ -8,5 +8,8 @@ export const theme = {
 export const variants = {
     extend: {},
 };
-export const plugins = [];
+export const plugins = [
+    '@tailwindcss/aspect-ratio',
+
+];
   

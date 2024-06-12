@@ -1,6 +1,7 @@
-
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
+
+
 
 interface Slide {
   id: number;
@@ -25,7 +26,7 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
 
   return (
     <div className="relative w-full mx-auto">
-      <div className="flex overflow-hidden w-full h-64 sm:h-80 md:h-96 lg:h-112 xl:h-128 border rounded-lg">
+      <div className="flex overflow-hidden w-full h-64 sm:h-80 md:h-96 lg:h-112 xl:h-128 border rounded-lg ">
         {slides.map((slide) => (
           <div
             key={slide.id}
@@ -63,5 +64,4 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
 };
 
 export default Carousel;
-
 

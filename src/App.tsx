@@ -1,17 +1,12 @@
 import "./App.css";
-import Carousel from "./components/Carousel.tsx";
-import AddSnacks from "./components/AddSnacks"
 import SavedSnacks from "./components/SavedSnacks.tsx";
-import SnacksContainer from "./components/SnacksContainer.tsx";
+import HomePage from "./pages/HomePage.tsx";
+
 
 function App() {
-
   return (
     <div>
-      {/* <Modal /> */}
-      <Carousel />
-      <SnacksContainer />
-      <AddSnacks />
+      <HomePage />
       <SavedSnacks />
     </div>
   );
