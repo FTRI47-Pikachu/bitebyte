@@ -1,9 +1,9 @@
 import React from "react";
-import AddSnack from "../components/AddSnack";
 import Carousel from "../components/Carousel";
 import Header from '../components/header'
 import SavedSnacks from "../components/SavedSnacks";
 import AddSnackAWS from "../components/AddSnackAWS"
+import snack2 from "../assets/snack2.jpg"
 
 const HomePage: React.FC = ( { userId }) => {
   const slides = [
@@ -16,8 +16,7 @@ const HomePage: React.FC = ( { userId }) => {
     {
       id: 2,
       content: "",
-      image:
-        "https://cablevey.com/wp-content/uploads/2020/11/The-Complete-Guide-on-Snack-Foods.jpg",
+      image: snack2
     },
     {
       id: 3,

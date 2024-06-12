@@ -60,7 +60,9 @@ const Signup: React.FC = () => {
             required
           />
         </div>
-        <button type="submit">Create Account</button>
+        <div className='button-container'>
+          <button type="submit">Create Account</button></div>
+        
       </form>
 
     </div>

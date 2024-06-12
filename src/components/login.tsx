@@ -61,7 +61,10 @@ const Login: React.FC = ({ setUserId }) => {
             required
           />
         </div>
-        <button type="submit">Sign In</button>
+        <div className='button-container'>
+          <button type="submit">Sign In</button>
+          </div>
+        
       </form>
        <p>Don't have an account yet?  <Link to="/signup">Sign up</Link> Here!</p>
        
