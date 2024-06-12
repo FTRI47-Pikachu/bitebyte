@@ -6,6 +6,8 @@ import AddSnackAWS from "../components/AddSnackAWS"
 import snack2 from "../assets/snack2.jpg"
 
 const HomePage: React.FC = ( { userId }) => {
+  const [refreshKey, setRefreshKey] = React.useState(0);
+
   const slides = [
     {
       id: 1,
@@ -30,9 +32,13 @@ const HomePage: React.FC = ( { userId }) => {
     <div className="flex flex-col items-center justify-center min-h-screen space-y-6 p-4">
       <Header />
       <Carousel slides={slides} />
-      <AddSnackAWS />
+      <AddSnackAWS 
+      userId={userId}
+      setRefreshKey={setRefreshKey}
+      />
       <SavedSnacks
       userId={userId}
+      refreshKey={refreshKey}
        />
     </div>
   );

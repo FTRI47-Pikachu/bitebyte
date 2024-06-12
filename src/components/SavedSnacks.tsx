@@ -143,7 +143,7 @@
 
 import React, { useState, useEffect } from "react";
 
-const SavedSnacks = ({ userId }) => {
+const SavedSnacks = ({ userId, refreshKey }) => {
   const [snacks, setSnacks] = useState([]);
 
   useEffect(() => {
@@ -163,7 +163,7 @@ const SavedSnacks = ({ userId }) => {
     if (userId) {
       fetchSnacks();
     }
-  }, [userId]);
+  }, [userId, refreshKey]);
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
