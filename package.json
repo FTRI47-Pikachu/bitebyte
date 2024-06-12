@@ -12,8 +12,12 @@
     "dev:server": "nodemon server/index.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.592.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.592.0",
     "@reduxjs/toolkit": "^2.2.5",
+    "aws-sdk": "^2.1639.0",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "nodemon": "^3.1.3",

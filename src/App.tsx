@@ -2,12 +2,13 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import TestFileUpload from './components/testFileUpload'; // Import the TestFileUpload component
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="bg-custom-dark text-white min-h-screen flex flex-col items-center justify-center"> {/* Updated class list here */}
+    <div className="bg-white text-white min-h-screen flex flex-col items-center justify-center"> {/* Updated class list here */}
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
