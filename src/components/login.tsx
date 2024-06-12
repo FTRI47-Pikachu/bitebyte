@@ -1,16 +1,39 @@
 import React, { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Header from './header';
 
-const Login: React.FC = () => {
+const Login: React.FC = ({ setUserId }) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+
+  const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
+    // Post to the backend
+    try {
+      const response = await fetch('/api/login',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if(response.ok) {
+        const data = await response.json();
+        setUserId(data.userId);
+        console.log("Login sucsess data:",data);
+        navigate('/homepage');
+      } else {
+        const errorData = await response.json();
+          setError(errorData.error);
+      }
+    } catch (error) {
+      console.error("Error during login.")
+    }    
   };
 
   return (
