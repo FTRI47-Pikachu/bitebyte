@@ -15,8 +15,8 @@ const User = UserModel(sequelize, DataTypes);
 const Snack = SnackModel(sequelize, DataTypes);
 
 // Define associations
-Snack.belongsTo(User, { foreignKey: 'user_id' });
-User.hasMany(Snack, { foreignKey: 'user_id' });
+User.hasMany(Snack, { foreignKey: 'user_id', as: 'snacks' });
+Snack.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
 // Export initialized models and sequelize instance
 export { sequelize, User, Snack };
