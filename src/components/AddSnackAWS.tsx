@@ -12,7 +12,7 @@ const s3Client = new S3Client({
   }
 });
 
-const AddSnack: React.FC = () => {
+const AddSnack: React.FC = ( { userId }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [text, setText] = useState<string>("");
   const [textarea, setTextarea] = useState<string>("");
@@ -58,7 +58,7 @@ const AddSnack: React.FC = () => {
       formData.append("fileUrl", fileUrl);
       formData.append("text", text);
       formData.append("textarea", textarea);
-      formData.append("user_id", "1"); // Hardcoded user_id
+      formData.append("user_id", userId); // Hardcoded user_id
   
       const response = await fetch("/api/snacks", {
         method: "POST",

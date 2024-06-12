@@ -3,7 +3,6 @@ import multer from 'multer';
 import aws from 'aws-sdk';
 import { sequelize, User, Snack } from './models/db.js'; 
 import session from 'express-session';
-import multer from 'multer';
 
 
 
