@@ -90,6 +90,28 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Define a route to sign up a user
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ where: { username } });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Username already taken' });
+    }
+
+    // Create a new user
+    const newUser = await User.create({ username, password });
+
+    res.status(200).json({ message: 'Signup successful', userId: newUser.id });
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Middleware to check if user is authenticated
 const isAuthenticated = (req, res, next) => {
   if (req.session.userId) {
