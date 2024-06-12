@@ -36,7 +36,7 @@ a:hover {
 }
 
 body {
-  @apply m-0 flex items-center justify-center min-w-[320px] min-h-screen bg-white; /* Set body background to white */
+  @apply m-0 flex items-center justify-center min-w-[320px] min-h-screen bg-gradient-to-b from-purple-200 to-purple-800; /* Set body background to white */
 }
 
 h1,
@@ -45,11 +45,11 @@ h2 {
 }
 
 button {
-  @apply rounded-custom border border-blue-600 px-9 py-1 my-2 text-base font-medium bg-gray-200 cursor-pointer transition-colors duration-200;
+  @apply rounded-custom border border-gray-200 bg-blue-300 px-8 py-1 my-2 text-base font-medium  cursor-pointer transition-colors duration-200;
 }
 
 button:hover {
-  @apply border-white;
+  @apply border-blue-400;
 }
 
 button:focus,
@@ -77,4 +77,11 @@ button:focus-visible {
 .login-signup-container input {
   @apply w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue;
   margin-bottom: 1rem;
+}
+.button-container {
+  @apply flex w-full;
+}
+
+.button-container button {
+  @apply ml-auto;
 }

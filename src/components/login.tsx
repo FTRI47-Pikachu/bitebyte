@@ -30,6 +30,7 @@ const Login: React.FC = ({ setUserId }) => {
       } else {
         const errorData = await response.json();
           setError(errorData.error);
+          window.alert('Username does not exist or Password wrong!')
       }
     } catch (error) {
       console.error("Error during login.")
@@ -61,7 +62,10 @@ const Login: React.FC = ({ setUserId }) => {
             required
           />
         </div>
-        <button type="submit">Sign In</button>
+          <div className='button-container'>
+          <button type="submit">Sign In</button>
+          </div>
+        
       </form>
        <p>Don't have an account yet?  <Link to="/signup">Sign up</Link> Here!</p>
        
