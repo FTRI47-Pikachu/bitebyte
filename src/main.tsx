@@ -6,8 +6,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
-import Login from './component/login'
-import Signup from './component/signup.tsx';
+import Login from './components/login.tsx'
+import Signup from './components/signup.tsx';
+import HomePage from './pages/HomePage.tsx';
+
 
 const router = createBrowserRouter([
   {
@@ -18,11 +20,15 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+  {
+    path: "/homepage",
+    element: <HomePage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
- 
+
   </React.StrictMode>,
 )
