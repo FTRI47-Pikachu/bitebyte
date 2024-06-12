@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-
-// // Load environment variables from .env file
-// import dotenv from 'dotenv';
-// dotenv.config();
-
 import {
   S3Client,
   PutObjectCommand,
@@ -19,7 +14,6 @@ const s3Client = new S3Client({
     secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY
   },
 });
-
 
 const TestFileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -50,10 +44,6 @@ const TestFileUpload: React.FC = () => {
       console.log('Starting upload...');
       console.log('AWS Region:', REGION);
 
-      // Resolve the credentials and log them
-      const credentials = await s3Client.config.credentials();
-      console.log('AWS Access Key ID:', credentials.accessKeyId);
-
       // Check if the client can list objects in the bucket
       const listParams = {
         Bucket: 'bitebyte-ftri47',
@@ -76,7 +66,15 @@ const TestFileUpload: React.FC = () => {
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUploadClick} disabled={uploading}>
+      <button
+        onClick={handleUploadClick}
+        disabled={uploading}
+        className={`px-4 py-2 rounded-md transition-colors duration-300 ${
+          uploading
+            ? 'bg-gray-400 text-gray-800 cursor-not-allowed'
+            : 'bg-blue-500 text-white hover:bg-blue-600'
+        }`}
+      >
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
     </div>

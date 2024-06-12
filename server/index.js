@@ -1,4 +1,6 @@
 import express from 'express';
+import multer from 'multer';
+import aws from 'aws-sdk';
 import { sequelize, User, Snack } from './models/db.js'; 
 import session from 'express-session';
 import multer from 'multer';
@@ -8,6 +10,7 @@ import multer from 'multer';
 const app = express();
 const upload = multer();
 const PORT = process.env.PORT || 3001;
+
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -159,6 +162,41 @@ app.post('/logout', (req, res) => {
     }
     res.status(200).json({ message: 'Logout successful' });
   });
+});
+
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    const file = req.file;
+    const { otherInfo } = req.body;
+
+    // Upload the file to S3
+    const s3Params = {
+      Bucket: 'bitebyte-ftri47',
+      Key: `${Date.now()}_${file.originalname}`,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+    };
+
+    const s3Response = await s3.upload(s3Params).promise();
+    const imageUrl = s3Response.Location;
+
+    // Save the image URL and other information to the database
+    const snack = await Snack.create({
+      user_id: 'test',
+      name: 'test',
+      photo_url: imageUrl,
+      category: 'test',
+      rating: 'test',
+      comment: 'test',
+      image: 'test',
+    });
+
+    res.send({ snack });
+  } catch (err) {
+    console.error('Error uploading file:', err);
+    res.status(500).send('There was an error uploading your file.');
+  }
 });
 
 app.get('/', (req, res) => {
