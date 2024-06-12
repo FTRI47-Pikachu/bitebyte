@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './header';
+import Logoimage from '../assets/logo-image.png';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
@@ -15,6 +16,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-signup-container">
+       <img src={Logoimage} alt="Login" style={{ width: '40px', height: 'auto' }}/> 
       <Header />
       <form onSubmit={handleSubmit}>
         <div>
@@ -37,7 +39,7 @@ const Login: React.FC = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Sign In</button>
       </form>
        <p>Don't have an account yet?  <Link to="/signup">Sign up</Link> Here!</p>
        

@@ -32,8 +32,7 @@ h1, h2 {
 }
 
 button {
-  @apply rounded-custom border border-blue-600 px-3 py-2 text-base font-medium bg-blue-500 cursor-pointer transition-colors duration-200;
-  width:fit-content;
+  @apply rounded-custom border border-blue-600 px-9 py-1 my-2 text-base font-medium bg-gray-200 cursor-pointer transition-colors duration-200;
 }
 
 button:hover {
@@ -46,22 +45,23 @@ button:focus, button:focus-visible {
 
 /* Custom styles for the login container */
 .login-signup-container {
-  @apply flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-md; /* Ensure bg-gray-100 for login container */
+  @apply flex flex-col items-center justify-center p-6 bg-gray-100 rounded-lg shadow-md; /* Ensure bg-gray-100 for login container */
 }
 
-.login-container form {
+.login-signup-container form {
   @apply mt-4 w-full max-w-md;
 }
 
-.login-container div {
-  @apply mb-4;
+
+.login-signup-container > div + div {
+  @apply mt-8; /* Adds space between the two divs */
 }
 
-.login-container label {
+.login-signup-container label {
   @apply block mb-2 font-semibold text-gray-700;
 }
 
-.login-container input {
+.login-signup-container input {
   @apply w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue;
   mmargin-bottom: 1rem;
 }
