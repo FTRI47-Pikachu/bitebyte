@@ -12,7 +12,7 @@ const s3Client = new S3Client({
   }
 });
 
-const AddSnack: React.FC = ( { userId }) => {
+const AddSnack: React.FC = ( { userId, setRefreshKey }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [text, setText] = useState<string>("");
   const [textarea, setTextarea] = useState<string>("");
@@ -67,6 +67,7 @@ const AddSnack: React.FC = ( { userId }) => {
   
       if (response.ok) {
         console.log("Data posted successfully");
+        setRefreshKey((prevKey) => prevKey + 1);
       } else {
         console.error("Failed to post data");
       }
