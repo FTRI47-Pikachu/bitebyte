@@ -37,9 +37,9 @@ const Signup: React.FC = () => {
             required
           />
         </div>
-        <button type="submit"><Link to="/login">Create Account</Link></button>
+        <button type="submit"><Link to="/">Create Account</Link></button>
       </form>
-      {/* <p>Don't have an account yet? <Link to="/signup">Sign up</Link></p> */}
+      
     </div>
   );
 };

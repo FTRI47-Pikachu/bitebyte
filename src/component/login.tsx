@@ -39,8 +39,8 @@ const Login: React.FC = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-       <p>Don't have an account yet? Signup Here! </p>
-        {/* <Link to="/signup">Sign up</Link>  */}
+       <p>Don't have an account yet?  <Link to="/signup">Sign up</Link> Here!</p>
+       
     </div>
   );
 };
