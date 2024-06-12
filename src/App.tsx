@@ -29,7 +29,6 @@ function App() {
       <p className="read-the-docs mt-8">
         Click on the Vite and React logos to learn more
       </p>
-      <TestFileUpload /> {/* Render the TestFileUpload component */}
     </div>
   );
 }
