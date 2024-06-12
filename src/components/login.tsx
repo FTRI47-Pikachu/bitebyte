@@ -2,11 +2,12 @@ import React, { useState, FormEvent } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import Header from './header';
 
-const Login: React.FC = () => {
+const Login: React.FC = ({ setUserId }) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
 
 
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,7 @@ const Login: React.FC = () => {
 
       if(response.ok) {
         const data = await response.json();
+        setUserId(data.userId);
         console.log("Login sucsess data:",data);
         navigate('/homepage');
       } else {
