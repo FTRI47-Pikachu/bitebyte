@@ -31,7 +31,9 @@ const HomePage: React.FC = ( { userId }) => {
     <div className="flex flex-col items-center justify-center min-h-screen space-y-6 p-4">
       <Header />
       <Carousel slides={slides} />
-      <AddSnackAWS />
+      <AddSnackAWS 
+      userId={userId}
+      />
       <SavedSnacks
       userId={userId}
        />
