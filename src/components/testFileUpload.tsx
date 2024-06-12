@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-
-// // Load environment variables from .env file
-// import dotenv from 'dotenv';
-// dotenv.config();
-
 import {
   S3Client,
   PutObjectCommand,
@@ -19,7 +14,6 @@ const s3Client = new S3Client({
     secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY
   },
 });
-
 
 const TestFileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -49,10 +43,6 @@ const TestFileUpload: React.FC = () => {
     try {
       console.log('Starting upload...');
       console.log('AWS Region:', REGION);
-
-      // Resolve the credentials and log them
-      const credentials = await s3Client.config.credentials();
-      console.log('AWS Access Key ID:', credentials.accessKeyId);
 
       // Check if the client can list objects in the bucket
       const listParams = {
