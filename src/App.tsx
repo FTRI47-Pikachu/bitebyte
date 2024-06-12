@@ -1,5 +1,6 @@
 import "./App.css";
 import SavedSnacks from "./components/SavedSnacks.tsx";
+import SnacksContainer from "./components/SnacksContainer.tsx";
 import HomePage from "./pages/HomePage.tsx";
 
 
@@ -8,6 +9,7 @@ function App() {
     <div>
       <HomePage />
       <SavedSnacks />
+      <SnacksContainer />
     </div>
   );
 }
