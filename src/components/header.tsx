@@ -7,7 +7,6 @@ const Header: React.FC = () => {
        
        <img src={Logoimage} alt="Login" style={{ width: '40px', height: 'auto' }}/> 
        <span className="text-5xl font-bold text-gray-800"> {/* Increased font size */}
-       
         BiteByte
       </span>
     </div>
