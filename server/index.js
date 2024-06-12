@@ -31,6 +31,8 @@ app.get('/snacks', async (req, res) => {
 app.get('/users/:userId/snacks', async (req, res) => {
   try {
     const { userId } = req.params;
+    
+    // Find the user by primary key and include associated snacks
     const user = await User.findByPk(userId, {
       include: {
         model: Snack,
@@ -38,16 +40,43 @@ app.get('/users/:userId/snacks', async (req, res) => {
       },
     });
 
+    // If user not found, return a 404 error
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.json(user.snacks);
+    // Return the user's snacks
+    res.status(200).json({ snacks: user.snacks });
   } catch (error) {
-    console.error('Error fetching snacks:', error);
+    // Log the error and return a 500 status with an error message
+    console.error('Error fetching user snacks:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+// Define a route to login a user
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { username } });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (user.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+
+    res.status(200).json({ message: 'Login successful', userId: user.id });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
