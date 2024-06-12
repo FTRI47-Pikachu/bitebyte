@@ -6,6 +6,8 @@ import SavedSnacks from "../components/SavedSnacks";
 import AddSnackAWS from "../components/AddSnackAWS"
 
 const HomePage: React.FC = ( { userId }) => {
+  const [refreshKey, setRefreshKey] = React.useState(0);
+
   const slides = [
     {
       id: 1,
@@ -33,9 +35,11 @@ const HomePage: React.FC = ( { userId }) => {
       <Carousel slides={slides} />
       <AddSnackAWS 
       userId={userId}
+      setRefreshKey={setRefreshKey}
       />
       <SavedSnacks
       userId={userId}
+      refreshKey={refreshKey}
        />
     </div>
   );
