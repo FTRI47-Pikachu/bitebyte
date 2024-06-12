@@ -23,7 +23,8 @@ const Signup: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Signup sucess: ', data);
+        console.log('Signup success: ', data);
+        navigate('/');
       } else {
         const errorData = await response.json();
         setError(errorData.error);

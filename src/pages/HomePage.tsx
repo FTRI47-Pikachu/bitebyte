@@ -1,6 +1,7 @@
 import React from "react";
 import AddSnack from "../components/AddSnack";
 import Carousel from "../components/Carousel";
+import Header from '../components/header'
 
 const HomePage: React.FC = () => {
   const slides = [
@@ -26,6 +27,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-6 p-4">
+      <Header />
       <Carousel slides={slides} />
       <AddSnack />
     </div>
