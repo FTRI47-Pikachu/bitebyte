@@ -1,9 +1,12 @@
 import express from 'express';
 import { sequelize, User, Snack } from './models/db.js'; 
 import session from 'express-session';
+import multer from 'multer';
+
 
 
 const app = express();
+const upload = multer();
 const PORT = process.env.PORT || 3001;
 
 // Middleware to parse JSON requests
@@ -34,6 +37,29 @@ app.get('/snacks', async (req, res) => {
     res.json(snacks);
   } catch (err) {
     res.status(500).send('Error retrieving snacks');
+  }
+});
+
+// POST route to add a new snack
+app.post('/snacks', upload.none(), async (req, res) => {
+  const { text: name, textarea: comment, user_id, fileUrl: photo_url } = req.body;
+
+  try {
+    // Create a new snack record in the database
+    const newSnack = await Snack.create({
+      user_id: parseInt(user_id, 10),  // Make sure user_id is an integer
+      name,
+      photo_url,
+      category: 'test',  // Hardcoded category as 'test'
+      rating: null,      // No rating provided
+      comment,
+      image: null        // No image blob provided
+    });
+
+    res.status(201).send({ message: 'Snack created successfully', snack: newSnack });
+  } catch (error) {
+    console.error('Error creating snack:', error);
+    res.status(500).send({ error: 'Failed to create snack' });
   }
 });
 
