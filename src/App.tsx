@@ -2,20 +2,23 @@ import "./App.css";
 import SavedSnacks from "./components/SavedSnacks.tsx";
 import SnacksContainer from "./components/SnacksContainer.tsx";
 import HomePage from "./pages/HomePage.tsx";
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import React from 'react';
 import './App.css';
 import TestFileUpload from './components/testFileUpload'; // Import the TestFileUpload component
 
+//import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Login from './component/login'
+//import Signup from './component/signup'
 
-function App() {
+const App: React.FC= ()=> {
   return (
-    <div>
-   <HomePage />
-      <SavedSnacks />
-      <SnacksContainer />   
-    </div>
+
+        <div className="bg-white text-black min-h-screen flex flex-col items-center justify-center">
+        <div>
+          <Login />
+        </div>
+       
+      </div>
   );
 }
 

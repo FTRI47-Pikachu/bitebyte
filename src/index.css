@@ -2,16 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* Custom global styles */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #ffffff;
-
+  color: rgba(0, 0, 0, 0.87);
+  background-color: white; /* Ensure background color is white */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,55 +16,53 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  @apply font-medium text-brand-blue no-underline;
 }
+
 a:hover {
-  color: #535bf2;
+  @apply text-hover-blue;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  @apply m-0 flex items-center justify-center min-w-[320px] min-h-screen bg-white; /* Set body background to white */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1, h2 {
+  @apply text-4xl leading-tight;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  @apply rounded-custom border border-blue-600 px-9 py-1 my-2 text-base font-medium bg-gray-200 cursor-pointer transition-colors duration-200;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  @apply border-white;
 }
+
+button:focus, button:focus-visible {
+  @apply outline-none ring-4 ring-blue-300;
+}
+
+/* Custom styles for the login container */
+.login-signup-container {
+  @apply flex flex-col items-center justify-center p-6 bg-gray-100 rounded-lg shadow-md; /* Ensure bg-gray-100 for login container */
+}
+
+.login-signup-container form {
+  @apply mt-4 w-full max-w-md;
+}
+
+
+.login-signup-container > div + div {
+  @apply mt-8; /* Adds space between the two divs */
+}
+
+.login-signup-container label {
+  @apply block mb-2 font-semibold text-gray-700;
+}
+
+.login-signup-container input {
+  @apply w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-blue;
+  mmargin-bottom: 1rem;
+}
+
